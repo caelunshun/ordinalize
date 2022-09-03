@@ -51,9 +51,10 @@ pub fn derive_ordinal(input: proc_macro::TokenStream) -> proc_macro::TokenStream
     let match_arms = generate_match_arms(&variants, &input);
 
     let enum_ident = &input.ident;
+    let generics = &input.generics;
 
     let tokens = quote! {
-        impl #enum_ident {
+        impl #generics #enum_ident #generics {
             pub fn ordinal(&self) -> usize {
                 match self {
                     #(#match_arms,)*
